@@ -1,0 +1,86 @@
+﻿@model TUSSAN_TUNQUI.Models.Empleado
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal table">
+        <dt>
+            <!--
+                @Html.DisplayNameFor(model => model.DNI)-->
+            DNI:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DNI)
+        </dd>
+
+        <dt>
+            <!--
+                @Html.DisplayNameFor(model => model.nombreEmpleado)-->
+            Nombre Completo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombreEmpleado)
+        </dd>
+
+        <dt>
+            <!--
+                @Html.DisplayNameFor(model => model.usuario)-->
+            Nombre de Usuario:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
+        <dt>
+            <!--
+                @Html.DisplayNameFor(model => model.contraseña)-->
+            Contraseña:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contraseña)
+        </dd>
+
+        <dt>
+            <!--
+            @Html.DisplayNameFor(model => model.estado)-->
+            Estado:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            <!--
+            @Html.DisplayNameFor(model => model.Cargo.descripcionCargo)-->
+            Cargo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cargo.descripcionCargo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista de Empleados", "Index")
+        </div>
+    }
+</div>

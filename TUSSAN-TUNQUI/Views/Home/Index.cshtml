@@ -1,5 +1,15 @@
-﻿<!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Html.Partial("_Header")
+</head>
 <body>
     <!--LOGIN-->
     <div id="login" class="fondo py-sm-5">
@@ -24,15 +34,15 @@
                                 <div class="py-0 py-sm-3 py-md-3 py-xl-3">
                                     <span class="display-4 display-sm-4 display-md-4 display-xl-4 align-items-middle">Inicio Sesion</span>
                                 </div>
-                                <form id="form1" action="~/Home/IntranetAdmin" class="row justify-content-center" method="post">
+                                <form id="form1" action="~/Home/login" class="row justify-content-center" method="post">
                                     <div>
                                         <div class="form-group col-12">
 
-                                            <input id="txtUsuario" name="txtnom" type="text" placeholder="Usuario" class="form-control" />
+                                            <input id="txtUsuario" name="username" type="text" placeholder="Usuario" class="form-control" />
                                         </div>
 
                                         <div class="form-group col-12">
-                                            <input id="txtContraseña" name="txtcontra" type="password" placeholder="Contraseña" class="form-control" />
+                                            <input id="txtContraseña" name="password" type="password" placeholder="Contraseña" class="form-control" />
                                         </div>
                                         <div class="col-12 py-2">
                                             <div class="row justify-content-center">
@@ -162,8 +172,5 @@
         </form>
     </div>
     <!--CONTACTO-->
-
-
 </body>
 </html>
-

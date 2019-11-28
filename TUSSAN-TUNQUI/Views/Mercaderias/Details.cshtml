@@ -1,0 +1,75 @@
+﻿@model TUSSAN_TUNQUI.Models.Mercaderia
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Mercaderia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcionMercaderia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcionMercaderia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.areaCubica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.areaCubica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.nombreEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.nombreEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoMercaderia.descripcionTipoMerca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoMercaderia.descripcionTipoMerca)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMercaderia }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

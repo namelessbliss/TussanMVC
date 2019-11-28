@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TUSSAN_TUNQUI.Models;
@@ -9,26 +12,43 @@ using TUSSAN_TUNQUI.Models;
 namespace TUSSAN_TUNQUI.Controllers {
     public class HomeController : Controller {
 
+        private tussanbdEntities15 db = new tussanbdEntities15();
 
         [HttpGet]
         public ActionResult Index() {
             return View();
         }
 
-        /*
-        public ActionResult IntranetAdmin()
-        {
-            string nombre = Request.Form["txtnom"].ToString();
-            string contraseña = Request.Form["txtcontra"].ToString();
+        [HttpPost]
+        public ActionResult login(string username, string password) {
+            Empleado empleado;
+            if (username.ToString().Length > 0 && password.ToString().Length > 0)
+            {
+                if (Session["Empleado"] == null)
+                {
+                    empleado = db.Empleado.Where(d => d.usuario == username && d.contraseña == password).First();
 
-            usuario usu = new usuario();
-            usu.login(nombre, contraseña);
-            string sql = string.Format("select * from Empleado where usuario = '"+nombre+"' and contraseña = '"+contraseña+"'");
-            DB db = new DB();
-            db.transaccion(sql);            
+                    if (empleado != null)
+                    {
+                        //Creamos y Almacenamos empleado en la sesión
+                        Session["Empleado"] = empleado;
+                        return Redirect("~/Adm");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    empleado = Session["Empleado"] as Empleado;
+                    return Redirect("~/Adm");
+                }
+            }
+
             return View();
-        }              
-        */
+        }
+
 
 
     }

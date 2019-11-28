@@ -1,0 +1,76 @@
+﻿@model IEnumerable<TUSSAN_TUNQUI.Models.Registro>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.areaCubica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.nombreEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empleado.DNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mercaderia.descripcionMercaderia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoRegistro.descripcionTipo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.areaCubica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.nombreEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empleado.DNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mercaderia.descripcionMercaderia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoRegistro.descripcionTipo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idRegistro }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idRegistro }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idRegistro })
+        </td>
+    </tr>
+}
+
+</table>

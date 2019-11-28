@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TUSSAN_TUNQUI.Models.Empleado>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--
+            @Html.DisplayNameFor(model => model.DNI)
+            -->
+            DNI
+        </th>
+        <th>
+            <!--
+            @Html.DisplayNameFor(model => model.nombreEmpleado)
+            -->
+            Nombre Completo
+        </th>
+        <th>
+            <!--
+            @Html.DisplayNameFor(model => model.usuario)
+            -->
+            Nombre de Usuario
+        </th>
+        <th>
+            <!--
+            @Html.DisplayNameFor(model => model.contraseña)
+            -->
+            Contraseña
+        </th>
+        <th>
+            <!--
+                @Html.DisplayNameFor(model => model.estado) -->
+            Estado
+        </th>
+        <th>
+            <!--
+                @Html.DisplayNameFor(model => model.Cargo.descripcionCargo) -->
+            Cargo
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DNI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreEmpleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contraseña)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cargo.descripcionCargo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idEmpleado }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idEmpleado }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idEmpleado })
+            </td>
+        </tr>
+    }
+
+</table>

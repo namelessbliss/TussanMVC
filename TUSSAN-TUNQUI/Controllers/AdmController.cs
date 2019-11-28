@@ -4,13 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TUSSAN_TUNQUI.Controllers
-{
-    public class AdmController : Controller
-    {
+namespace TUSSAN_TUNQUI.Controllers {
+    public class AdmController : Controller {
+
         // GET: Adm
-        public ActionResult Index()
-        {
+        public ActionResult adm() {
             return View();
         }
     }

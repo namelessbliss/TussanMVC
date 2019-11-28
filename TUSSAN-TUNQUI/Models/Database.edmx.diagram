@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dd0e5c24956e406280d357bb4d1f36a2" Name="Diagram1">
+        <EntityTypeShape EntityType="tussanbdModel4.Cargo" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.Cliente" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.Empleado" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.Mercaderia" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.Registro" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.TipoMercaderia" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.TipoRegistro" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="tussanbdModel4.R_5" ManuallyRouted="false" />
+        <AssociationConnector Association="tussanbdModel4.R_1" ManuallyRouted="false" />
+        <AssociationConnector Association="tussanbdModel4.R_14" ManuallyRouted="false" />
+        <AssociationConnector Association="tussanbdModel4.R_6" ManuallyRouted="false" />
+        <AssociationConnector Association="tussanbdModel4.R_12" ManuallyRouted="false" />
+        <AssociationConnector Association="tussanbdModel4.R_13" ManuallyRouted="false" />
+        <AssociationConnector Association="tussanbdModel4.R_7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tussanbdModel3.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreEmpresa" Type="varchar" MaxLength="100" />
+          <Property Name="dueñoEmpresa" Type="varchar" MaxLength="100" />
+          <Property Name="RUC" Type="varchar" MaxLength="13" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCargo" Type="int" Nullable="false" />
+          <Property Name="DNI" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="100" />
+          <Property Name="contraseña" Type="varchar" MaxLength="100" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Mercaderia">
+          <Key>
+            <PropertyRef Name="idMercaderia" />
+          </Key>
+          <Property Name="idMercaderia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionMercaderia" Type="varchar" MaxLength="100" />
+          <Property Name="areaCubica" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idTipoMerca" Type="int" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="100" />
+          <Property Name="unidad" Type="varchar" MaxLength="100" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="idRegistro" />
+          </Key>
+          <Property Name="idRegistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idMercaderia" Type="int" Nullable="false" />
+          <Property Name="idTipoRegistro" Type="int" Nullable="false" />
+          <Property Name="idEmpleado" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="areaCubica" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoRegistro">
+          <Key>
+            <PropertyRef Name="idTipoRegistro" />
+          </Key>
+          <Property Name="idTipoRegistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionTipo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="R_1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Mercaderia">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_12">
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mercaderia">
+              <PropertyRef Name="idMercaderia" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idMercaderia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_6">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_7">
+          <End Role="TipoRegistro" Type="Self.TipoRegistro" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRegistro">
+              <PropertyRef Name="idTipoRegistro" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idTipoRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tussanbdModel3StoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mercaderia" EntityType="Self.Mercaderia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRegistro" EntityType="Self.TipoRegistro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="R_1" Association="Self.R_1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+          </AssociationSet>
+          <AssociationSet Name="R_12" Association="Self.R_12">
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="Self.R_14">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="R_6" Association="Self.R_6">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="R_7" Association="Self.R_7">
+            <End Role="TipoRegistro" EntitySet="TipoRegistro" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tussanbdModel3" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreEmpresa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dueñoEmpresa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RUC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="Mercaderia" Relationship="Self.R_1" FromRole="Cliente" ToRole="Mercaderia" />
+          <NavigationProperty Name="Registro" Relationship="Self.R_14" FromRole="Cliente" ToRole="Registro" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCargo" Type="Int32" Nullable="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="Registro" Relationship="Self.R_6" FromRole="Empleado" ToRole="Registro" />
+        </EntityType>
+        <EntityType Name="Mercaderia">
+          <Key>
+            <PropertyRef Name="idMercaderia" />
+          </Key>
+          <Property Name="idMercaderia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionMercaderia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="areaCubica" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idTipoMerca" Type="Int32" Nullable="false" />
+          <Property Name="categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.R_1" FromRole="Mercaderia" ToRole="Cliente" />
+          <NavigationProperty Name="Registro" Relationship="Self.R_12" FromRole="Mercaderia" ToRole="Registro" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="idRegistro" />
+          </Key>
+          <Property Name="idRegistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idMercaderia" Type="Int32" Nullable="false" />
+          <Property Name="idTipoRegistro" Type="Int32" Nullable="false" />
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="areaCubica" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.R_14" FromRole="Registro" ToRole="Cliente" />
+          <NavigationProperty Name="Empleado" Relationship="Self.R_6" FromRole="Registro" ToRole="Empleado" />
+          <NavigationProperty Name="Mercaderia" Relationship="Self.R_12" FromRole="Registro" ToRole="Mercaderia" />
+          <NavigationProperty Name="TipoRegistro" Relationship="Self.R_7" FromRole="Registro" ToRole="TipoRegistro" />
+        </EntityType>
+        <EntityType Name="TipoRegistro">
+          <Key>
+            <PropertyRef Name="idTipoRegistro" />
+          </Key>
+          <Property Name="idTipoRegistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionTipo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registro" Relationship="Self.R_7" FromRole="TipoRegistro" ToRole="Registro" />
+        </EntityType>
+        <Association Name="R_1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Mercaderia">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_6">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_12">
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mercaderia">
+              <PropertyRef Name="idMercaderia" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idMercaderia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_7">
+          <End Role="TipoRegistro" Type="Self.TipoRegistro" Multiplicity="1" />
+          <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRegistro">
+              <PropertyRef Name="idTipoRegistro" />
+            </Principal>
+            <Dependent Role="Registro">
+              <PropertyRef Name="idTipoRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tussanbdEntities14" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="Mercaderia" EntityType="Self.Mercaderia" />
+          <EntitySet Name="Registro" EntityType="Self.Registro" />
+          <EntitySet Name="TipoRegistro" EntityType="Self.TipoRegistro" />
+          <AssociationSet Name="R_1" Association="Self.R_1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="Self.R_14">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="R_6" Association="Self.R_6">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="R_12" Association="Self.R_12">
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+          <AssociationSet Name="R_7" Association="Self.R_7">
+            <End Role="TipoRegistro" EntitySet="TipoRegistro" />
+            <End Role="Registro" EntitySet="Registro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tussanbdModel3StoreContainer" CdmEntityContainer="tussanbdEntities14">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="tussanbdModel3.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombreEmpresa" ColumnName="nombreEmpresa" />
+                <ScalarProperty Name="dueñoEmpresa" ColumnName="dueñoEmpresa" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="tussanbdModel3.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="idCargo" ColumnName="idCargo" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mercaderia">
+            <EntityTypeMapping TypeName="tussanbdModel3.Mercaderia">
+              <MappingFragment StoreEntitySet="Mercaderia">
+                <ScalarProperty Name="idMercaderia" ColumnName="idMercaderia" />
+                <ScalarProperty Name="descripcionMercaderia" ColumnName="descripcionMercaderia" />
+                <ScalarProperty Name="areaCubica" ColumnName="areaCubica" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idTipoMerca" ColumnName="idTipoMerca" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registro">
+            <EntityTypeMapping TypeName="tussanbdModel3.Registro">
+              <MappingFragment StoreEntitySet="Registro">
+                <ScalarProperty Name="idRegistro" ColumnName="idRegistro" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idMercaderia" ColumnName="idMercaderia" />
+                <ScalarProperty Name="idTipoRegistro" ColumnName="idTipoRegistro" />
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="areaCubica" ColumnName="areaCubica" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRegistro">
+            <EntityTypeMapping TypeName="tussanbdModel3.TipoRegistro">
+              <MappingFragment StoreEntitySet="TipoRegistro">
+                <ScalarProperty Name="idTipoRegistro" ColumnName="idTipoRegistro" />
+                <ScalarProperty Name="descripcionTipo" ColumnName="descripcionTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

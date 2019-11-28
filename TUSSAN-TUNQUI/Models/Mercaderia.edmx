@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tussanbdModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreEmpresa" Type="varchar" MaxLength="100" />
+          <Property Name="dueñoEmpresa" Type="varchar" MaxLength="100" />
+          <Property Name="RUC" Type="varchar" MaxLength="13" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Mercaderia">
+          <Key>
+            <PropertyRef Name="idMercaderia" />
+          </Key>
+          <Property Name="idMercaderia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionMercaderia" Type="varchar" MaxLength="100" />
+          <Property Name="areaCubica" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idTipoMerca" Type="int" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="100" />
+          <Property Name="unidad" Type="varchar" MaxLength="100" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoMercaderia">
+          <Key>
+            <PropertyRef Name="idTipoMerca" />
+          </Key>
+          <Property Name="idTipoMerca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionTipoMerca" Type="varchar" MaxLength="100" />
+          <Property Name="precioMerca" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="R_1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Mercaderia">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_13">
+          <End Role="TipoMercaderia" Type="Self.TipoMercaderia" Multiplicity="1" />
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMercaderia">
+              <PropertyRef Name="idTipoMerca" />
+            </Principal>
+            <Dependent Role="Mercaderia">
+              <PropertyRef Name="idTipoMerca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tussanbdModel2StoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mercaderia" EntityType="Self.Mercaderia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMercaderia" EntityType="Self.TipoMercaderia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="R_1" Association="Self.R_1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+          </AssociationSet>
+          <AssociationSet Name="R_13" Association="Self.R_13">
+            <End Role="TipoMercaderia" EntitySet="TipoMercaderia" />
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tussanbdModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreEmpresa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dueñoEmpresa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RUC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="Mercaderia" Relationship="Self.R_1" FromRole="Cliente" ToRole="Mercaderia" />
+        </EntityType>
+        <EntityType Name="Mercaderia">
+          <Key>
+            <PropertyRef Name="idMercaderia" />
+          </Key>
+          <Property Name="idMercaderia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionMercaderia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="areaCubica" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idTipoMerca" Type="Int32" Nullable="false" />
+          <Property Name="categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.R_1" FromRole="Mercaderia" ToRole="Cliente" />
+          <NavigationProperty Name="TipoMercaderia" Relationship="Self.R_13" FromRole="Mercaderia" ToRole="TipoMercaderia" />
+        </EntityType>
+        <EntityType Name="TipoMercaderia">
+          <Key>
+            <PropertyRef Name="idTipoMerca" />
+          </Key>
+          <Property Name="idTipoMerca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionTipoMerca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="precioMerca" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Mercaderia" Relationship="Self.R_13" FromRole="TipoMercaderia" ToRole="Mercaderia" />
+        </EntityType>
+        <Association Name="R_1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Mercaderia">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_13">
+          <End Role="TipoMercaderia" Type="Self.TipoMercaderia" Multiplicity="1" />
+          <End Role="Mercaderia" Type="Self.Mercaderia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMercaderia">
+              <PropertyRef Name="idTipoMerca" />
+            </Principal>
+            <Dependent Role="Mercaderia">
+              <PropertyRef Name="idTipoMerca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tussanbdEntities13" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Mercaderia" EntityType="Self.Mercaderia" />
+          <EntitySet Name="TipoMercaderia" EntityType="Self.TipoMercaderia" />
+          <AssociationSet Name="R_1" Association="Self.R_1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+          </AssociationSet>
+          <AssociationSet Name="R_13" Association="Self.R_13">
+            <End Role="TipoMercaderia" EntitySet="TipoMercaderia" />
+            <End Role="Mercaderia" EntitySet="Mercaderia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tussanbdModel2StoreContainer" CdmEntityContainer="tussanbdEntities13">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="tussanbdModel2.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombreEmpresa" ColumnName="nombreEmpresa" />
+                <ScalarProperty Name="dueñoEmpresa" ColumnName="dueñoEmpresa" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mercaderia">
+            <EntityTypeMapping TypeName="tussanbdModel2.Mercaderia">
+              <MappingFragment StoreEntitySet="Mercaderia">
+                <ScalarProperty Name="idMercaderia" ColumnName="idMercaderia" />
+                <ScalarProperty Name="descripcionMercaderia" ColumnName="descripcionMercaderia" />
+                <ScalarProperty Name="areaCubica" ColumnName="areaCubica" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idTipoMerca" ColumnName="idTipoMerca" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoMercaderia">
+            <EntityTypeMapping TypeName="tussanbdModel2.TipoMercaderia">
+              <MappingFragment StoreEntitySet="TipoMercaderia">
+                <ScalarProperty Name="idTipoMerca" ColumnName="idTipoMerca" />
+                <ScalarProperty Name="descripcionTipoMerca" ColumnName="descripcionTipoMerca" />
+                <ScalarProperty Name="precioMerca" ColumnName="precioMerca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

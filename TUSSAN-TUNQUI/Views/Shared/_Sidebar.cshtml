@@ -25,13 +25,10 @@
     </div>
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>Cerrar Menu</a>
-        <a href="resumen.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>Resumen</a>
-        <a href="usuario.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Usuarios</a>
-        <a href="cliente.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Clientes</a>
-        <a href="mercaderia.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Mercaderia</a>
-        <a href="listado_mercaderia.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Listado Mercaderia</a>
-        <a href="operacion_registro.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>Registrar Guia</a>
-        <a href="listado_registro.aspx" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>Lista de Guias </a>
+        <a href="@Url.Action("Index", "Empleados")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Empleados</a>
+        <a href="@Url.Action("Index", "Clientes")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Clientes</a>
+        <a href="@Url.Action("Index", "Mercaderias")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Mercaderia</a>
+        <a href="@Url.Action("Index", "Registros")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>Registrar Guia</a>
         <!--<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>News</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>General</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Traffic</a>

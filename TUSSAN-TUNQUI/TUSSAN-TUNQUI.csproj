@@ -44,8 +44,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -117,6 +125,56 @@
     <Content Include="img\Almacen.jpg" />
     <Content Include="img\Documentos.jpg" />
     <Content Include="img\user.png" />
+    <Content Include="Models\Cliente.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cliente.edmx</DependentUpon>
+      <LastGenOutput>Cliente.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Cliente.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cliente.edmx</DependentUpon>
+      <LastGenOutput>Cliente1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Database.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Empleado.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Empleado.edmx</DependentUpon>
+      <LastGenOutput>Empleado.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Empleado.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Empleado.edmx</DependentUpon>
+      <LastGenOutput>Empleado1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Mercaderia.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mercaderia.edmx</DependentUpon>
+      <LastGenOutput>Mercaderia.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Mercaderia.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mercaderia.edmx</DependentUpon>
+      <LastGenOutput>Mercaderia1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Registro.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Registro.edmx</DependentUpon>
+      <LastGenOutput>Registro.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Registro.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Registro.edmx</DependentUpon>
+      <LastGenOutput>Registro1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -144,6 +202,41 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
+    <EntityDeploy Include="Models\Empleado.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Empleado.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Empleado.edmx.diagram">
+      <DependentUpon>Empleado.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Cliente.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Cliente.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Cliente.edmx.diagram">
+      <DependentUpon>Cliente.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Mercaderia.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Mercaderia.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Mercaderia.edmx.diagram">
+      <DependentUpon>Mercaderia.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Registro.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Registro.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Registro.edmx.diagram">
+      <DependentUpon>Registro.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Database.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Database.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database.edmx.diagram">
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -155,11 +248,111 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdmController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MercaderiasController.cs" />
+    <Compile Include="Controllers\RegistrosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cargo.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cliente.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cliente.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cliente.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB.cs" />
+    <Compile Include="Models\Empleado.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Empleado.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empleado.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empleado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Empleado.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empleado1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Empleado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mercaderia.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mercaderia.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mercaderia.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mercaderia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mercaderia.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mercaderia1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mercaderia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Registro.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registro.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Registro.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Registro.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registro.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Registro1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registro.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoMercaderia.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoRegistro.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,18 +368,36 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Home\Error.cshtml" />
-    <Content Include="Views\Adm\Intranet.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Adm\IntranetAdmin.cshtml" />
     <Content Include="Views\Shared\_BodyContainer.cshtml" />
-    <Content Include="Views\Adm\Index.cshtml" />
+    <Content Include="Views\Clientes\Create.cshtml" />
+    <Content Include="Views\Clientes\Delete.cshtml" />
+    <Content Include="Views\Clientes\Details.cshtml" />
+    <Content Include="Views\Clientes\Edit.cshtml" />
+    <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Mercaderias\Create.cshtml" />
+    <Content Include="Views\Mercaderias\Delete.cshtml" />
+    <Content Include="Views\Mercaderias\Details.cshtml" />
+    <Content Include="Views\Mercaderias\Edit.cshtml" />
+    <Content Include="Views\Mercaderias\Index.cshtml" />
+    <Content Include="Views\Empleados\Create.cshtml" />
+    <Content Include="Views\Empleados\Delete.cshtml" />
+    <Content Include="Views\Empleados\Details.cshtml" />
+    <Content Include="Views\Empleados\Edit.cshtml" />
+    <Content Include="Views\Empleados\Index.cshtml" />
+    <Content Include="Views\Registros\Create.cshtml" />
+    <Content Include="Views\Registros\Delete.cshtml" />
+    <Content Include="Views\Registros\Details.cshtml" />
+    <Content Include="Views\Registros\Edit.cshtml" />
+    <Content Include="Views\Registros\Index.cshtml" />
+    <Content Include="Views\Adm\adm.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,6 +407,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
