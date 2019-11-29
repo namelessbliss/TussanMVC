@@ -7,20 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TUSSAN_TUNQUI.Models {
+namespace TUSSAN_TUNQUI.Models
+{
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class tussanbdEntities12 : DbContext {
+    
+    public partial class tussanbdEntities12 : DbContext
+    {
         public tussanbdEntities12()
-            : base("name=tussanbdEntities12") {
+            : base("name=tussanbdEntities12")
+        {
         }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Cliente> Cliente { get; set; }
     }
 }

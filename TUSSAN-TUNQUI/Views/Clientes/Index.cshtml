@@ -27,26 +27,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombreEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dueñoEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RUC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idCliente }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idCliente }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idCliente })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dueñoEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RUC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idCliente }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idCliente }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idCliente })
+            </td>
+        </tr>
+    }
 
 </table>

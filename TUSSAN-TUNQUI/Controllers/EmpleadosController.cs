@@ -8,39 +8,61 @@ using System.Web;
 using System.Web.Mvc;
 using TUSSAN_TUNQUI.Models;
 
-namespace TUSSAN_TUNQUI.Controllers
-{
-    public class EmpleadosController : Controller
-    {
+namespace TUSSAN_TUNQUI.Controllers {
+    public class EmpleadosController : Controller {
         private tussanbdEntities11 db = new tussanbdEntities11();
 
+        private Boolean isSessionSet() {
+            if (Session["Empleado"] != null)
+                return true;
+            else
+                return false;
+        }
+
+        private ActionResult redirectToHome() {
+            return Redirect("~/Home");
+        }
+
         // GET: Empleados
-        public ActionResult Index()
-        {
-            var empleado = db.Empleado.Include(e => e.Cargo);
-            return View(empleado.ToList());
+        public ActionResult Index() {
+            if (isSessionSet())
+            {
+                var empleado = db.Empleado.Include(e => e.Cargo);
+                return View(empleado.ToList());
+            }
+            else
+                return redirectToHome();
         }
 
         // GET: Empleados/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+        public ActionResult Details(int? id) {
+            if (isSessionSet())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Empleado empleado = db.Empleado.Find(id);
+                if (empleado == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(empleado);
             }
-            Empleado empleado = db.Empleado.Find(id);
-            if (empleado == null)
-            {
-                return HttpNotFound();
-            }
-            return View(empleado);
+            else
+                return redirectToHome();
         }
 
         // GET: Empleados/Create
-        public ActionResult Create()
-        {
-            ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo");
-            return View();
+        public ActionResult Create() {
+            if (isSessionSet())
+            {
+
+                ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo");
+                return View();
+            }
+            else
+                return redirectToHome();
         }
 
         // POST: Empleados/Create
@@ -48,33 +70,43 @@ namespace TUSSAN_TUNQUI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idEmpleado,idCargo,DNI,nombreEmpleado,usuario,contraseña,estado")] Empleado empleado)
-        {
-            if (ModelState.IsValid)
+        public ActionResult Create([Bind(Include = "idEmpleado,idCargo,DNI,nombreEmpleado,usuario,contraseña,estado")] Empleado empleado) {
+            if (isSessionSet())
             {
-                db.Empleado.Add(empleado);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo", empleado.idCargo);
-            return View(empleado);
+                if (ModelState.IsValid)
+                {
+                    db.Empleado.Add(empleado);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo", empleado.idCargo);
+                return View(empleado);
+            }
+            else
+                return redirectToHome();
         }
 
         // GET: Empleados/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+        public ActionResult Edit(int? id) {
+            if (isSessionSet())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Empleado empleado = db.Empleado.Find(id);
+                if (empleado == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo", empleado.idCargo);
+                return View(empleado);
             }
-            Empleado empleado = db.Empleado.Find(id);
-            if (empleado == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo", empleado.idCargo);
-            return View(empleado);
+            else
+                return redirectToHome();
         }
 
         // POST: Empleados/Edit/5
@@ -82,46 +114,61 @@ namespace TUSSAN_TUNQUI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idEmpleado,idCargo,DNI,nombreEmpleado,usuario,contraseña,estado")] Empleado empleado)
-        {
-            if (ModelState.IsValid)
+        public ActionResult Edit([Bind(Include = "idEmpleado,idCargo,DNI,nombreEmpleado,usuario,contraseña,estado")] Empleado empleado) {
+            if (isSessionSet())
             {
-                db.Entry(empleado).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(empleado).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo", empleado.idCargo);
+                return View(empleado);
             }
-            ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo", empleado.idCargo);
-            return View(empleado);
+            else
+                return redirectToHome();
         }
 
         // GET: Empleados/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+        public ActionResult Delete(int? id) {
+            if (isSessionSet())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Empleado empleado = db.Empleado.Find(id);
+                if (empleado == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(empleado);
             }
-            Empleado empleado = db.Empleado.Find(id);
-            if (empleado == null)
-            {
-                return HttpNotFound();
-            }
-            return View(empleado);
+            else
+                return redirectToHome();
         }
 
         // POST: Empleados/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Empleado empleado = db.Empleado.Find(id);
-            db.Empleado.Remove(empleado);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+        public ActionResult DeleteConfirmed(int id) {
+            if (isSessionSet())
+            {
+
+                Empleado empleado = db.Empleado.Find(id);
+                db.Empleado.Remove(empleado);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+                return redirectToHome();
         }
 
-        protected override void Dispose(bool disposing)
-        {
+        protected override void Dispose(bool disposing) {
             if (disposing)
             {
                 db.Dispose();

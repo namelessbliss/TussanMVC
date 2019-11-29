@@ -13,64 +13,65 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.fecha)
+            Fecha
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantidad)
+            Cantidad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.areaCubica)
+            Area Cubica
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.estado)
+            Estado
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente.nombreEmpresa)
+            Empresa
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Empleado.DNI)
+            DNI Empleado
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mercaderia.descripcionMercaderia)
+            Descripcion
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoRegistro.descripcionTipo)
+            Tipo de Registro
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.areaCubica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.nombreEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empleado.DNI)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mercaderia.descripcionMercaderia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoRegistro.descripcionTipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idRegistro }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idRegistro }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idRegistro })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaCubica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.nombreEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.DNI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mercaderia.descripcionMercaderia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoRegistro.descripcionTipo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idRegistro }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idRegistro }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idRegistro })
+            </td>
+        </tr>
+    }
 
 </table>

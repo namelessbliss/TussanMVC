@@ -289,7 +289,7 @@
         </EntityType>
         <Association Name="R_5">
           <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <End Role="Empleado" Type="tussanbdModel4.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cargo">
               <PropertyRef Name="idCargo" />
@@ -324,7 +324,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="R_6">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Empleado" Type="tussanbdModel4.Empleado" Multiplicity="1" />
           <End Role="Registro" Type="Self.Registro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
@@ -374,7 +374,7 @@
         <EntityContainer Name="tussanbdEntities15" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cargo" EntityType="Self.Cargo" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
-          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="Empleado" EntityType="tussanbdModel4.Empleado" />
           <EntitySet Name="Mercaderia" EntityType="Self.Mercaderia" />
           <EntitySet Name="Registro" EntityType="Self.Registro" />
           <EntitySet Name="TipoMercaderia" EntityType="Self.TipoMercaderia" />

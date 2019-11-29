@@ -1,4 +1,5 @@
 ﻿<!-- Sidebar/menu -->
+@using TUSSAN_TUNQUI.Models
 <nav class="w3-sidebar w3-collapse w3-greyscale w3-animate-left" style="z-index: 3; width: 300px;" id="mySidebar">
     <br>
     <div class="w3-container w3-row">
@@ -7,11 +8,14 @@
         </div>
         <div class="w3-col s8 w3-bar">
             <span>
-                Bienvenido <strong>
+                @{var empleado = Session["Empleado"] as Empleado;}
+                Bienvenido @empleado.nombreEmpleado<strong>
                     <asp:Label ID="empleado" runat="server" Text="Label"></asp:Label>
                 </strong>
             </span><br>
-            <asp:Button ID="btnLogout" runat="server" class=" w3-bar-item w3-center  btn-danger text-white mx-2" Text="Cerrar Sesion" OnClick="btnLogout_Click" />
+            <form class="form-group" action="Adm/CloseSession" method="post">
+                <input id="btnLogout" type="submit" class=" w3-bar-item w3-center btn-danger text-white mx-2" value="Cerrar Sesion" />
+            </form>
             <!--
             <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
             <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>

@@ -13,58 +13,59 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.descripcionMercaderia)
+            Descripcion
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.areaCubica)
+            Area Cubica
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.categoria)
+            Categoria
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.unidad)
+            Unidad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantidad)
+            Cantidad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente.nombreEmpresa)
+            Empresa
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoMercaderia.descripcionTipoMerca)
+            Tipo de Mercaderia
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcionMercaderia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.areaCubica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.categoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.unidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.nombreEmpresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoMercaderia.descripcionTipoMerca)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idMercaderia }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idMercaderia }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idMercaderia })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcionMercaderia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaCubica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.nombreEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoMercaderia.descripcionTipoMerca)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idMercaderia }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idMercaderia }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idMercaderia })
+            </td>
+        </tr>
+    }
 
 </table>

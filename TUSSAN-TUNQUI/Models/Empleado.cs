@@ -7,19 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TUSSAN_TUNQUI.Models
-{
+namespace TUSSAN_TUNQUI.Models {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Empleado
-    {
+
+    public partial class Empleado {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empleado()
-        {
+        public Empleado() {
             this.Registro = new HashSet<Registro>();
         }
-    
+
         public int idEmpleado { get; set; }
         public int idCargo { get; set; }
         public string DNI { get; set; }
@@ -27,7 +24,7 @@ namespace TUSSAN_TUNQUI.Models
         public string usuario { get; set; }
         public string contraseña { get; set; }
         public Nullable<int> estado { get; set; }
-    
+
         public virtual Cargo Cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Registro> Registro { get; set; }

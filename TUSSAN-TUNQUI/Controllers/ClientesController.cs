@@ -8,37 +8,61 @@ using System.Web;
 using System.Web.Mvc;
 using TUSSAN_TUNQUI.Models;
 
-namespace TUSSAN_TUNQUI.Controllers
-{
-    public class ClientesController : Controller
-    {
+namespace TUSSAN_TUNQUI.Controllers {
+    public class ClientesController : Controller {
+
+
+
+        private Boolean isSessionSet() {
+            if (Session["Empleado"] != null)
+                return true;
+            else
+                return false;
+        }
+
+        private ActionResult redirectToHome() {
+            return Redirect("~/Home");
+        }
+
         private tussanbdEntities12 db = new tussanbdEntities12();
 
         // GET: Clientes
-        public ActionResult Index()
-        {
-            return View(db.Cliente.ToList());
+        public ActionResult Index() {
+            if (isSessionSet())
+            {
+                return View(db.Cliente.ToList());
+            }
+            else
+                return redirectToHome();
         }
 
         // GET: Clientes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+        public ActionResult Details(int? id) {
+            if (isSessionSet())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = db.Cliente.Find(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cliente);
             }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
+            else
+                return redirectToHome();
         }
 
         // GET: Clientes/Create
-        public ActionResult Create()
-        {
-            return View();
+        public ActionResult Create() {
+            if (isSessionSet())
+            {
+                return View();
+            }
+            else
+                return redirectToHome();
         }
 
         // POST: Clientes/Create
@@ -46,31 +70,39 @@ namespace TUSSAN_TUNQUI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idCliente,nombreEmpresa,dueñoEmpresa,RUC,estado")] Cliente cliente)
-        {
-            if (ModelState.IsValid)
+        public ActionResult Create([Bind(Include = "idCliente,nombreEmpresa,dueñoEmpresa,RUC,estado")] Cliente cliente) {
+            if (isSessionSet())
             {
-                db.Cliente.Add(cliente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Cliente.Add(cliente);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(cliente);
+                return View(cliente);
+            }
+            else
+                return redirectToHome();
         }
 
         // GET: Clientes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+        public ActionResult Edit(int? id) {
+            if (isSessionSet())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = db.Cliente.Find(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cliente);
             }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
+            else
+                return redirectToHome();
         }
 
         // POST: Clientes/Edit/5
@@ -78,45 +110,56 @@ namespace TUSSAN_TUNQUI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idCliente,nombreEmpresa,dueñoEmpresa,RUC,estado")] Cliente cliente)
-        {
-            if (ModelState.IsValid)
+        public ActionResult Edit([Bind(Include = "idCliente,nombreEmpresa,dueñoEmpresa,RUC,estado")] Cliente cliente) {
+            if (isSessionSet())
             {
-                db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(cliente).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(cliente);
             }
-            return View(cliente);
+            else
+                return redirectToHome();
         }
 
         // GET: Clientes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+        public ActionResult Delete(int? id) {
+            if (isSessionSet())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = db.Cliente.Find(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cliente);
             }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
+            else
+                return redirectToHome();
         }
 
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cliente cliente = db.Cliente.Find(id);
-            db.Cliente.Remove(cliente);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+        public ActionResult DeleteConfirmed(int id) {
+            if (isSessionSet())
+            {
+                Cliente cliente = db.Cliente.Find(id);
+                db.Cliente.Remove(cliente);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+                return redirectToHome();
         }
 
-        protected override void Dispose(bool disposing)
-        {
+        protected override void Dispose(bool disposing) {
             if (disposing)
             {
                 db.Dispose();

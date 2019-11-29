@@ -292,7 +292,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB.cs" />
     <Compile Include="Models\Empleado.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -396,8 +395,8 @@
     <Content Include="Views\Registros\Details.cshtml" />
     <Content Include="Views\Registros\Edit.cshtml" />
     <Content Include="Views\Registros\Index.cshtml" />
-    <Content Include="Views\Adm\adm.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Adm\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
