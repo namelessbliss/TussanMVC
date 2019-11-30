@@ -12,9 +12,13 @@ namespace TUSSAN_TUNQUI.Controllers {
     public class RegistrosController : Controller {
         private tussanbdEntities15 db = new tussanbdEntities15();
 
+        Empleado empleado;
         private Boolean isSessionSet() {
             if (Session["Empleado"] != null)
+            {
+                getSession();
                 return true;
+            }
             else
                 return false;
         }
@@ -23,13 +27,19 @@ namespace TUSSAN_TUNQUI.Controllers {
             return Redirect("~/Home");
         }
 
+        private Empleado getSession() {
+            if (empleado == null)
+                empleado = Session["Empleado"] as Empleado;
+            return empleado;
+        }
+
         // GET: Registros
         public ActionResult Index() {
             if (isSessionSet())
             {
 
                 var registro = db.Registro.Include(r => r.Cliente).Include(r => r.Empleado).Include(r => r.Mercaderia).Include(r => r.TipoRegistro);
-                return View(registro.ToList());
+                return View(registro.ToList().Where(r => r.estado == 1));
             }
             else
                 return redirectToHome();
@@ -60,15 +70,27 @@ namespace TUSSAN_TUNQUI.Controllers {
         public ActionResult Create() {
             if (isSessionSet())
             {
-
-                ViewBag.idCliente = new SelectList(db.Cliente, "idCliente", "nombreEmpresa");
-                ViewBag.idEmpleado = new SelectList(db.Empleado, "idEmpleado", "DNI");
-                ViewBag.idMercaderia = new SelectList(db.Mercaderia, "idMercaderia", "descripcionMercaderia");
+                Empleado empleado = Session["Empleado"] as Empleado;
+                ViewBag.idCliente = new SelectList(db.Cliente.Where(c => c.estado == 1), "idCliente", "nombreEmpresa");
+                ViewBag.idEmpleado = new SelectList(db.Empleado.Where(e => e.idEmpleado == empleado.idEmpleado), "idEmpleado", "nombreEmpleado");
+                //ViewBag.idMercaderia = new SelectList(db.Mercaderia, "idMercaderia", "descripcionMercaderia" );
+                ViewBag.idMercaderia = new SelectList("");
                 ViewBag.idTipoRegistro = new SelectList(db.TipoRegistro, "idTipoRegistro", "descripcionTipo");
                 return View();
             }
             else
                 return redirectToHome();
+        }
+
+        /**
+         * Obtine lista de mercaderias segun el cliente seleccionado
+         * Es recepcionado por un jquery que parsea el json y populate en la lista de mercaderias
+         * */
+        public JsonResult getListaMercaderias(int idCliente) {
+            List<Mercaderia> listaMercas;
+            db.Configuration.ProxyCreationEnabled = false;
+            listaMercas = db.Mercaderia.Where(x => x.idCliente == idCliente).ToList();
+            return Json(listaMercas, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Registros/Create
@@ -148,7 +170,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Registros/Delete/5
         public ActionResult Delete(int? id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 if (id == null)
@@ -170,11 +192,13 @@ namespace TUSSAN_TUNQUI.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 Registro registro = db.Registro.Find(id);
-                db.Registro.Remove(registro);
+                //db.Registro.Remove(registro);
+                registro.estado = 0;
+                db.Entry(empleado).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

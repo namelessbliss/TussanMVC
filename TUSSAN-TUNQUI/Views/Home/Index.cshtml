@@ -11,6 +11,35 @@
     @Html.Partial("_Header")
 </head>
 <body>
+
+    @{var errorMsg = (string)ViewBag.ErrorMessage; }
+
+    <!--navbar-->
+    <div class="container-fluid navbar-dark bg-primary fixed-top">
+        <nav class="navbar navbar-expand-lg container">
+            <a class="navbar-brand" href="#">Almacen Tussan</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicio">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#historia">Nuestra Historia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--navbar-->
     <!--LOGIN-->
     <div id="login" class="fondo py-sm-5">
         <div class="container-fluid pt-5 sombra">
@@ -44,15 +73,18 @@
                                         <div class="form-group col-12">
                                             <input id="txtContraseña" name="password" type="password" placeholder="Contraseña" class="form-control" />
                                         </div>
+                                        <div class="form-group col-12">
+                                            <label class="col-form-label">@errorMsg</label>
+                                        </div>
                                         <div class="col-12 py-2">
                                             <div class="row justify-content-center">
-                                                <input id="btnLogin" type="submit" class="btn bg-primary text-white col-6" value="Ingresar" />
+                                                <input id="btnLogin" type="submit" class="btn bg-primary text-white col-6" value="Ingresar" style="font-size: 1.25rem;" />
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <a href="#" class="card-footer btn bg-primary text-white">Olvide mi contraseña</a>
+                            <a href="#" class="card-footer btn bg-primary text-white" style="font-size: 1.25rem;">Olvide mi contraseña</a>
                         </div>
                         <!--LOGIN-->
                     </div>
@@ -172,5 +204,6 @@
         </form>
     </div>
     <!--CONTACTO-->
+
 </body>
-</html>
+</html >

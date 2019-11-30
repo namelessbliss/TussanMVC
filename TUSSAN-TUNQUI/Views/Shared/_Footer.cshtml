@@ -1,4 +1,30 @@
 ﻿ <!-- Footer -->
+<script>
+    $("#fecha").datepicker({ dateFormat: 'dd-mm-yy' });
+</script>
+
+<script>
+    $(document).ready(function () {
+        //Primera vez que carga la pagina
+        $.get("/Registros/getListaMercaderias", { idCliente: $("#idCliente").val() }, function (data) {
+            $("idCliente").empty();
+            $.each(data, function (index, row) {
+                $("#idMercaderia").append("<option value='" + row.idMercaderia + "'>" + row.descripcionMercaderia + "</option>")
+            });
+        });
+
+        //Al cambiar el cliente seleccionado
+        $("#idCliente").change(function () {
+            $("#idMercaderia").empty();
+            $.get("/Registros/getListaMercaderias", { idCliente: $("#idCliente").val() }, function (data) {
+                $("idCliente").empty();
+                $.each(data, function (index, row) {
+                    $("#idMercaderia").append("<option value='" + row.idMercaderia + "'>" + row.descripcionMercaderia + "</option>")
+                });
+            });
+        })
+    });
+</script>
 <footer class="w3-container w3-padding-16 w3-light-grey">
     <h4>ALMACEN TUSSAN V 2.0</h4>
     <p>Desarrollado por: <a href="http://www.tunquisolutions.com/" target="_blank">Equipo TunquiSolutions</a></p>

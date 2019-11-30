@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Registrar</h2>
 
 @using (Html.BeginForm())
 {
@@ -59,19 +59,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control", @value = 1, @enabled = false } })
+                @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control", @Value = "1", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Registrar" class="btn btn-danger" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Regresar al listado", "Index")
+    @Html.ActionLink("Regresar al listado de empleados", "Index",null, new { @class = "btn btn-outline-primary my-4" })
 </div>

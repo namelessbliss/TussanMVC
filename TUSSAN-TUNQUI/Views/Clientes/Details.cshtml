@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nombreEmpresa)
+            Empresa
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.dueñoEmpresa)
+            Dueño
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RUC)
+            RUC
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.estado)
+            Estado
         </dt>
 
         <dd>
@@ -46,6 +46,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idCliente }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar Datos", "Edit", new { id = Model.idCliente }, new { @class = "btn btn-outline-primary my-4" }) |
+    @Html.ActionLink("Regresar a la lista de Clientes", "Index",null, new { @class = "btn btn-outline-primary my-4" })
 </p>

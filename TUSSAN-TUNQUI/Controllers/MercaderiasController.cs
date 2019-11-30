@@ -12,15 +12,25 @@ namespace TUSSAN_TUNQUI.Controllers {
     public class MercaderiasController : Controller {
         private tussanbdEntities13 db = new tussanbdEntities13();
 
+        Empleado empleado;
         private Boolean isSessionSet() {
             if (Session["Empleado"] != null)
+            {
+                getSession();
                 return true;
+            }
             else
                 return false;
         }
 
         private ActionResult redirectToHome() {
             return Redirect("~/Home");
+        }
+
+        private Empleado getSession() {
+            if (empleado == null)
+                empleado = Session["Empleado"] as Empleado;
+            return empleado;
         }
 
         // GET: Mercaderias
@@ -141,7 +151,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Mercaderias/Delete/5
         public ActionResult Delete(int? id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 if (id == null)
@@ -163,7 +173,7 @@ namespace TUSSAN_TUNQUI.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 Mercaderia mercaderia = db.Mercaderia.Find(id);

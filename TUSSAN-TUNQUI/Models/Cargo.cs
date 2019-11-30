@@ -7,19 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TUSSAN_TUNQUI.Models {
+namespace TUSSAN_TUNQUI.Models
+{
     using System;
     using System.Collections.Generic;
-
-    public partial class Cargo {
+    
+    public partial class Cargo
+    {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cargo() {
+        public Cargo()
+        {
             this.Empleado = new HashSet<Empleado>();
         }
-
+    
         public int idCargo { get; set; }
         public string descripcionCargo { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleado { get; set; }
     }

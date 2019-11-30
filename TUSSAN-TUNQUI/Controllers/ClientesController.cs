@@ -13,9 +13,13 @@ namespace TUSSAN_TUNQUI.Controllers {
 
 
 
+        Empleado empleado;
         private Boolean isSessionSet() {
             if (Session["Empleado"] != null)
+            {
+                getSession();
                 return true;
+            }
             else
                 return false;
         }
@@ -24,13 +28,19 @@ namespace TUSSAN_TUNQUI.Controllers {
             return Redirect("~/Home");
         }
 
+        private Empleado getSession() {
+            if (empleado == null)
+                empleado = Session["Empleado"] as Empleado;
+            return empleado;
+        }
+
         private tussanbdEntities12 db = new tussanbdEntities12();
 
         // GET: Clientes
         public ActionResult Index() {
             if (isSessionSet())
             {
-                return View(db.Cliente.ToList());
+                return View(db.Cliente.ToList().Where(c => c.estado == 1));
             }
             else
                 return redirectToHome();
@@ -127,7 +137,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Clientes/Delete/5
         public ActionResult Delete(int? id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
                 if (id == null)
                 {
@@ -148,10 +158,12 @@ namespace TUSSAN_TUNQUI.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
                 Cliente cliente = db.Cliente.Find(id);
-                db.Cliente.Remove(cliente);
+                // db.Cliente.Remove(cliente);
+                cliente.estado = 0; // cambia el valor del estado
+                db.Entry(cliente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

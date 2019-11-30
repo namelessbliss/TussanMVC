@@ -26,7 +26,16 @@ namespace TUSSAN_TUNQUI.Controllers {
             {
                 if (Session["Empleado"] == null)
                 {
-                    empleado = db.Empleado.Where(d => d.usuario == username && d.contraseña == password).First();
+                    try
+                    {
+                        empleado = db.Empleado.Where(d => d.usuario == username && d.contraseña == password && d.estado == 1).First();
+                    }
+                    catch (Exception e)
+                    {
+                        var error = e.Message;
+                        empleado = null;
+                    }
+
 
                     if (empleado != null)
                     {
@@ -36,7 +45,8 @@ namespace TUSSAN_TUNQUI.Controllers {
                     }
                     else
                     {
-                        return RedirectToAction("Index");
+                        ViewBag.ErrorMessage = "Usuario o contraseña incorrecto";
+                        return View("Index");
                     }
                 }
                 else
@@ -44,9 +54,9 @@ namespace TUSSAN_TUNQUI.Controllers {
                     empleado = Session["Empleado"] as Empleado;
                     return Redirect("~/Adm");
                 }
-            }
 
-            return View();
+            }
+            return RedirectToAction("Index");
         }
 
 

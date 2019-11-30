@@ -4,16 +4,16 @@
     <br>
     <div class="w3-container w3-row">
         <div class="w3-col s3">
-            <img src="../img/user.png" class="w3-circle w3-margin-right" style="width: 46px">
+            <img src="~/img/user.png" class="w3-circle w3-margin-right" style="width: 46px">
         </div>
         <div class="w3-col s8 w3-bar">
             <span>
                 @{var empleado = Session["Empleado"] as Empleado;}
-                Bienvenido @empleado.nombreEmpleado<strong>
+                Bienvenido @empleado.Cargo.descripcionCargo @empleado.nombreEmpleado<strong>
                     <asp:Label ID="empleado" runat="server" Text="Label"></asp:Label>
                 </strong>
             </span><br>
-            <form class="form-group" action="Adm/CloseSession" method="post">
+            <form class="form-group" action="~/Adm/CloseSession" method="post">
                 <input id="btnLogout" type="submit" class=" w3-bar-item w3-center btn-danger text-white mx-2" value="Cerrar Sesion" />
             </form>
             <!--
@@ -29,10 +29,14 @@
     </div>
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>Cerrar Menu</a>
-        <a href="@Url.Action("Index", "Empleados")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Empleados</a>
+        <a href="@Url.Action("Index", "Adm")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>Inicio</a>
+        @if (empleado.idCargo == 1)
+        {
+            <a href="@Url.Action("Index", "Empleados")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Empleados</a>
+        }
         <a href="@Url.Action("Index", "Clientes")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Clientes</a>
-        <a href="@Url.Action("Index", "Mercaderias")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Mercaderia</a>
-        <a href="@Url.Action("Index", "Registros")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>Registrar Guia</a>
+        <a href="@Url.Action("Index", "Mercaderias")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>Mercaderias</a>
+        <a href="@Url.Action("Index", "Registros")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>Registros</a>
         <!--<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>News</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>General</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Traffic</a>
@@ -46,3 +50,36 @@
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer" title="close side menu" id="myOverlay"></div>
+
+<script>
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+        if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+        } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+        }
+    }
+
+    // Close the sidebar with the close button
+    function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+    }</script>
+
+<script>
+    $('.decimalInput').on('keypress', function (e) {
+        return e.metaKey || // cmd/ctrl
+            e.which <= 0 || // arrow keys
+            e.which == 8 || // delete key
+            /[0-9]/.test(String.fromCharCode(e.which)); // numbers
+    })
+</script>

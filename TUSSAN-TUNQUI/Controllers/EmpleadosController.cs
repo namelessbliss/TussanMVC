@@ -12,9 +12,13 @@ namespace TUSSAN_TUNQUI.Controllers {
     public class EmpleadosController : Controller {
         private tussanbdEntities11 db = new tussanbdEntities11();
 
+        Empleado empleado;
         private Boolean isSessionSet() {
             if (Session["Empleado"] != null)
+            {
+                getSession();
                 return true;
+            }
             else
                 return false;
         }
@@ -23,12 +27,18 @@ namespace TUSSAN_TUNQUI.Controllers {
             return Redirect("~/Home");
         }
 
+        private Empleado getSession() {
+            if (empleado == null)
+                empleado = Session["Empleado"] as Empleado;
+            return empleado;
+        }
+
         // GET: Empleados
         public ActionResult Index() {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
                 var empleado = db.Empleado.Include(e => e.Cargo);
-                return View(empleado.ToList());
+                return View(empleado.ToList().Where(e => e.estado == 1));
             }
             else
                 return redirectToHome();
@@ -36,7 +46,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Empleados/Details/5
         public ActionResult Details(int? id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
                 if (id == null)
                 {
@@ -55,7 +65,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Empleados/Create
         public ActionResult Create() {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 ViewBag.idCargo = new SelectList(db.Cargo, "idCargo", "descripcionCargo");
@@ -71,7 +81,7 @@ namespace TUSSAN_TUNQUI.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idEmpleado,idCargo,DNI,nombreEmpleado,usuario,contraseña,estado")] Empleado empleado) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 if (ModelState.IsValid)
@@ -90,7 +100,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Empleados/Edit/5
         public ActionResult Edit(int? id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 if (id == null)
@@ -115,7 +125,7 @@ namespace TUSSAN_TUNQUI.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEmpleado,idCargo,DNI,nombreEmpleado,usuario,contraseña,estado")] Empleado empleado) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 if (ModelState.IsValid)
@@ -133,7 +143,7 @@ namespace TUSSAN_TUNQUI.Controllers {
 
         // GET: Empleados/Delete/5
         public ActionResult Delete(int? id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
 
@@ -156,11 +166,13 @@ namespace TUSSAN_TUNQUI.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            if (isSessionSet())
+            if (isSessionSet() && empleado.idCargo == 1)
             {
 
                 Empleado empleado = db.Empleado.Find(id);
-                db.Empleado.Remove(empleado);
+                //db.Empleado.Remove(empleado);
+                empleado.estado = 0;
+                db.Entry(empleado).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

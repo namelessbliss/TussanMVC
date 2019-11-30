@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="tussanbdModel4.Cargo" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="tussanbdModel4.Cliente" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="tussanbdModel4.Empleado" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tussanbdModel4.Mercaderia" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tussanbdModel4.Mercaderia" Width="1.75" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="tussanbdModel4.Registro" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="tussanbdModel4.TipoMercaderia" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="tussanbdModel4.TipoRegistro" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />

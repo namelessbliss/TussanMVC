@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>Empleado</h4>
@@ -74,6 +74,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.idEmpleado }) |
-    @Html.ActionLink("Regresar a la lista de Empleados", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idEmpleado }, new { @class = "btn btn-outline-danger mx-1" }) |
+    @Html.ActionLink("Regresar a la lista de Empleados", "Index",null, new { @class = "btn btn-outline-primary my-4" })
 </p>
